@@ -1,0 +1,105 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between; /* Align logo left, nav right */
+    align-items: center;
+    position: absolute; /* 🔥 NOW IT SITS OVER THE IMAGE */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10; /* ✅ Ensures it stays on top */
+    color: rgb(0, 0, 0); /* ✅ Makes text readable */
+    font-family: "Roboto", sans-serif;
+    font-size: 1.25rem;
+}   
+
+.SignUp{
+    margin: 0 1vw 0 1vw;
+    display: inline;
+    
+    outline: 0;
+    grid-gap: 8px;
+    align-items: center;
+    background-color: #8c82f9fd;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 16px;
+    gap: 8px;
+    justify-content: center;
+    line-height: 1.5;
+    overflow: hidden;
+    padding: 2px 6px;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: all .14s ease-out;
+    white-space: nowrap;
+    
+}
+
+.SignUp:hover {
+    box-shadow: 4px 4px 0 #000;
+    transform: translate(-4px,-4px);
+}
+
+.SignUp:focus-visible{
+    outline-offset: 1px;
+}
+
+
+.maintext {
+    text-align: end;
+    font-size: 4rem;
+}
+
+
+.hero {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: relative; /* ✅ Allows header to sit above */
+}
+
+/* LEFT SIDE - IMAGE */
+.hero-image {
+    flex: .6;
+    background-image: url('Image.jpg'); /* ✅ Change to your image */
+    background-size: cover;
+    background-position: center;
+}
+
+/* RIGHT SIDE - TEXT */
+.hero-text {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    background: white; /* ✅ Makes text readable */
+    font-family: "Roboto", sans-serif;
+    padding-bottom: 90px;
+}
+
+.hero-text h1 {
+    font-size: clamp(3rem, 6vw, 7rem); /* 🔥 Minimum 2rem, Scales with Viewport, Max 5rem */
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+    padding: 10px;
+}
+
+

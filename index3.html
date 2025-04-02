@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #333;
+            color: white;
+            padding: 20px;
+            height: 1250px;
+        }
+
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid gray;
+            transition: background 0.3s;
+        }
+
+        .sidebar ul li:hover {
+            background: #555;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .book-card {
+            width: 194px;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .book-card img {
+            width: 194px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .book-card h3 {
+            margin: 10px 0 5px;
+        }
+
+        .book-card p {
+            margin: 2px 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>Filter by Genre</h2>
+        <ul>
+            <li onclick="filterBooks('All')">All</li>
+            <li onclick="filterBooks('Fiction')">Fiction</li>
+            <li onclick="filterBooks('Non-Fiction')">Non-Fiction</li>
+            <li onclick="filterBooks('Sci-Fi')">Sci-Fi</li>
+            <li onclick="filterBooks('Fantasy')">Fantasy</li>
+        </ul>
+    </aside>
+
+    <main class="gallery" id="bookGallery">
+        <!-- Books will be loaded here dynamically -->
+    </main>
+
+    <script>
+        const books = [
+            { id: 1, title: "Book 1", author: "Author 1", genre: "Fiction" },
+            { id: 2, title: "Book 2", author: "Author 2", genre: "Non-Fiction" },
+            { id: 3, title: "Book 3", author: "Author 3", genre: "Sci-Fi" },
+            { id: 4, title: "Book 4", author: "Author 4", genre: "Fantasy" },
+            { id: 5, title: "Book 5", author: "Author 5", genre: "Fiction" },
+            { id: 6, title: "Book 6", author: "Author 6", genre: "Non-Fiction" },
+            { id: 7, title: "Book 7", author: "Author 7", genre: "Sci-Fi" },
+            { id: 8, title: "Book 8", author: "Author 8", genre: "Fantasy" },
+            { id: 9, title: "Book 9", author: "Author 9", genre: "Fiction" },
+            { id: 10, title: "Book 10", author: "Author 10", genre: "Non-Fiction" },
+            { id: 11, title: "Book 11", author: "Author 11", genre: "Sci-Fi" },
+            { id: 12, title: "Book 12", author: "Author 12", genre: "Fantasy" },
+            { id: 13, title: "Book 13", author: "Author 13", genre: "Fiction" },
+            { id: 14, title: "Book 14", author: "Author 14", genre: "Non-Fiction" },
+            { id: 15, title: "Book 15", author: "Author 15", genre: "Sci-Fi" },
+        ];
+
+        function displayBooks() {
+            const gallery = document.getElementById("bookGallery");
+            gallery.innerHTML = ""; // Clear existing content
+
+            books.forEach(book => {
+                const bookCard = document.createElement("div");
+                bookCard.classList.add("book-card");
+                bookCard.setAttribute("data-genre", book.genre);
+
+                bookCard.innerHTML = `
+                    <img src="Book${book.id}.jpeg" alt="${book.title}">
+                    <h3><strong>${book.title}</strong></h3>
+                    <p>${book.author}</p>
+                    <p>${book.genre}</p>
+                `;
+
+                gallery.appendChild(bookCard);
+            });
+        }
+
+        function filterBooks(genre) {
+            const bookCards = document.querySelectorAll(".book-card");
+
+            bookCards.forEach(card => {
+                const bookGenre = card.getAttribute("data-genre");
+                if (genre === "All" || bookGenre === genre) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        window.onload = displayBooks;
+    </script>
+
+</body>
+</html>
