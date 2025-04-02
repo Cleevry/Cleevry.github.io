@@ -3,81 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Library Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
-            margin: 0;
+            flex-direction: column;
         }
-        .login-container {
+
+        .login-box {
             background: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        .login-container h2 {
-            margin-bottom: 20px;
-        }
-        .login-container input {
+
+        input {
+            display: block;
             width: 92%;
             padding: 10px;
             margin: 10px 0;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             border-radius: 5px;
         }
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
+
+        button {
+            background: #333;
             color: white;
+            padding: 10px;
             border: none;
-            border-radius: 5px;
+            width: 100%;
             cursor: pointer;
-        }
-        .login-container button:hover {
-            background-color: #218838;
-        }
-        .error {
-            color: red;
-            font-size: 14px;
-            display: none;
-        }
-        .hint {
-            font-size: 12px;
-            color: #555;
+            border-radius: 5px;
             margin-top: 10px;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        .countdown {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <p class="error" id="error-message">Invalid credentials!</p>
-        <button onclick="validateLogin()">Login</button>
-        <p class="hint">Hint: Username is 'admin' and Password is 'password'</p>
+
+    <div class="login-box">
+        <h2>Library Login</h2>
+        <p><strong>Username:</strong> admin</p>
+        <p><strong>Password:</strong> password</p>
+        <input type="text" id="username" placeholder="Enter Username">
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="checkLogin()">Login</button>
+
+        <div class="countdown" id="countdown">
+            Event Countdown: Loading...
+        </div>
     </div>
 
     <script>
-        function validateLogin() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
+        function checkLogin() {
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
 
-            if (username === "admin" && password === "password") {
+            if (user === "admin" && pass === "password") {
                 window.location.href = "index3.html";
             } else {
-                errorMessage.style.display = "block";
+                alert("Incorrect username or password!");
             }
         }
+
+        function startCountdown() {
+            const eventDate = new Date("2026-09-28T00:00:00").getTime(); // ✅ FIXED: 2026, NOT 2006
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeLeft = eventDate - now;
+
+                if (timeLeft <= 0) {
+                    document.getElementById("countdown").innerHTML = "🎉 The Annual Day Celebration has begun!";
+                    return;
+                }
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = 
+                    `Event Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+
+            updateCountdown(); // Run immediately so there’s no delay
+            setInterval(updateCountdown, 1000);
+        }
+
+        startCountdown();
     </script>
+
 </body>
 </html>
